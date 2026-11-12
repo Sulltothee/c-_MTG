@@ -21,5 +21,10 @@ namespace MTG
         }
 
         Stack<Spell> spellStack;
+
+        public Spell this[int Index]
+        {
+            get => spellStack.ToArray()[Index];
+        }
     }
 }
