@@ -28,11 +28,28 @@ namespace MTG
         IGameState[] gameStates = new IGameState[] {new Untap(), new Upkeep(), new Draw(), new MainPhase(), new BeginningCombat(), new DeclareAttackers(), new DeclareBlockers(), new EndCombat(), new EndStep(), new Cleanup()};
         Queue<int> PhaseQueue = new Queue<int>();
 
+        int numPlayers = 2;
+        int turnOwner = 0;
+        List<int> turnOrder = new List<int>();
+
         void NewTurn()
         {
             //Adding all the phases to the queue
             AddPhases(new int[]{0,1,2,3,4,5,6,7,3,8,9 });
             LandsPlayed = 0;
+
+            //Change the turn's owner
+            turnOrder.RemoveAt(0);
+            AddTurnLoop();
+            turnOwner = turnOrder[0];
+        }
+
+        void AddTurnLoop()
+        {
+            for(int i = 0; i < numPlayers; i++)
+            {
+                turnOrder.Add(i);
+            }
         }
 
         void AddPhases(int[] Phases)
@@ -55,7 +72,22 @@ namespace MTG
 
         void GameLoop()
         {
-            NewTurn();
+            while(playing)
+            {
+                NewTurn();
+
+                while (PhaseQueue.Count > 0)
+                {
+                    currentStateIndex = PhaseQueue.Dequeue();
+
+                    gameStates[currentStateIndex].EnterState(this);
+
+                    PriorityPass();
+
+                    gameStates[currentStateIndex].ExitState(this);
+                    ChangePhase();
+                }
+            }
         }
 
         void ChangePhase()
@@ -71,6 +103,17 @@ namespace MTG
         {
             //TODO update state based effects
         }
+
+        void PriorityPass()
+        {
+            //TODO priority passing
+        }
         #endregion
+
+        //THERES NO SETTING TO UNGREY UNUSED METHODS SO I'M USING THIS
+        private void ungrey()
+        {
+            GameLoop();
+        }
     }
 }

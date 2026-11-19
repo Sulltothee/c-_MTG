@@ -6,17 +6,17 @@ namespace MTG.GamePhases
 {
     internal class Draw : IGameState
     {
-        public void EnterState()
+        public void EnterState(GameManager context)
         {
             throw new NotImplementedException();
         }
 
-        public void ExitState()
+        public void ExitState(GameManager context)
         {
             throw new NotImplementedException();
         }
 
-        public void Process()
+        public void Process(GameManager context)
         {
             throw new NotImplementedException();
         }

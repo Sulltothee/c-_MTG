@@ -12,5 +12,7 @@ namespace MTG
         {
             return true;
         }
+
+        IManaSource source;
     }
 }

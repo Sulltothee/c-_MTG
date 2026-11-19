@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MTG.Cards
+namespace MTG
 {
-    internal interface IPermanent
+    internal interface IAttackable
     {
-        void Enter() { }
     }
 }

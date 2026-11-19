@@ -9,22 +9,23 @@ namespace MTG
         private TheStack instance;
         private TheStack()
         {
-            spellStack = new Stack<Spell>();
+            stack = new Stack<IOnStack>();
         }
+
         public TheStack Instance()
         {
             if(instance == null)
             {
-                new TheStack();
+                instance = new TheStack();
             }
             return instance;
         }
 
-        Stack<Spell> spellStack;
+        public Stack<IOnStack> stack;
 
-        public Spell this[int Index]
+        public IOnStack this[int Index]
         {
-            get => spellStack.ToArray()[Index];
+            get => stack.ToArray()[Index];
         }
     }
 }

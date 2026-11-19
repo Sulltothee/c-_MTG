@@ -6,8 +6,8 @@ namespace MTG.GamePhases
 {
     internal interface IGameState
     {
-        public void EnterState();
-        public void ExitState();
-        public void Process();
+        public void EnterState(GameManager context);
+        public void ExitState(GameManager context);
+        public void Process(GameManager context);
     }
 }
